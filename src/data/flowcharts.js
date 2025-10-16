@@ -44,29 +44,63 @@ export const flowchartData = {
     description: "Device-first data collection with smart synchronization",
     icon: "Database",
     color: "from-blue-600 to-cyan-600",
-    code: `graph LR
-    Input["📥 INPUT CHANNELS<br/>Voice | Text<br/>Photo | Bank Sync"]
+    code: `graph TB
+    Input["📥 INPUT CHANNELS"]
     
-    Input --> LocalStore["💾 Local Storage<br/>SQLite + Cache"]
+    Input --> Voice["🎤 Voice Input<br/>Speech-to-Text<br/>Transcription"]
+    Input --> Text["📝 Text Input<br/>Manual Entry<br/>Chat Interface"]
+    Input --> Photo["📸 Photo Input<br/>Receipt OCR<br/>Document Scan"]
+    Input --> Auto["🔄 Auto Input<br/>Bank APIs<br/>Gig App Sync"]
     
-    LocalStore --> Features["⚡ Offline Features<br/>✓ Log Transactions<br/>✓ View History<br/>✓ Cached Alerts"]
+    Voice --> LocalStore["💾 LOCAL STORAGE LAYER<br/>SQLite Database"]
+    Text --> LocalStore
+    Photo --> LocalStore
+    Auto --> LocalStore
     
-    Features --> SyncCheck{"Network?"}
+    LocalStore --> Cache["⚡ Smart Cache<br/>Recent Data<br/>Frequent Queries<br/>User Preferences"]
     
-    SyncCheck -->|YES| CloudSync["☁️ Cloud Sync<br/>AWS/Azure"]
-    SyncCheck -->|NO| Queue["📥 Queue Manager<br/>Auto Sync Later"]
+    LocalStore --> Validation["✅ Data Validation<br/>Format Check<br/>Duplicate Detection<br/>Integrity Verify"]
     
-    CloudSync --> Done["✅ Sync Complete<br/>Local ↔ Cloud"]
-    Queue -.->|"Network Found"| CloudSync
+    Validation --> Valid{"Data Valid?"}
+    Valid -->|NO| ErrorHandle["⚠️ Error Handler<br/>User Notification<br/>Retry Logic"]
+    Valid -->|YES| Process
     
-    Done --> ToOrch["🚀 To Orchestrator"]
+    ErrorHandle --> Process["🔧 Data Processing<br/>Normalize Values<br/>Categorize Types<br/>Add Timestamps"]
     
-    style Input fill:#f0f9ff,stroke:#0284c7,stroke-width:2px
-    style LocalStore fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#fff
-    style Features fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
+    Cache --> Process
+    
+    Process --> Sync{"📡 Check Network"}
+    
+    Sync -->|ONLINE| CloudSync["☁️ Cloud Sync<br/>AWS/Azure Upload<br/>Conflict Resolution<br/>Bi-directional Sync"]
+    Sync -->|OFFLINE| Queue["� Sync Queue<br/>Store Instructions<br/>Retry Later"]
+    
+    CloudSync --> Verification["✓ Verification<br/>Checksum Validate<br/>Encryption Verify"]
+    Queue --> LocalFeatures
+    
+    Verification --> LocalFeatures["✨ Offline Features<br/>View History<br/>Search Data<br/>View Alerts<br/>See Budgets"]
+    
+    LocalFeatures --> Ready["✅ Data Ready<br/>For Processing"]
+    
+    Ready --> Next["🚀 To Phase 1<br/>Data Analysis"]
+    
+    style Input fill:#e0f2fe,stroke:#0369a1,stroke-width:3px
+    style Voice fill:#bae6fd,stroke:#0284c7,stroke-width:2px
+    style Text fill:#bae6fd,stroke:#0284c7,stroke-width:2px
+    style Photo fill:#bae6fd,stroke:#0284c7,stroke-width:2px
+    style Auto fill:#bae6fd,stroke:#0284c7,stroke-width:2px
+    style LocalStore fill:#0284c7,stroke:#0369a1,stroke-width:3px,color:#fff
+    style Cache fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
+    style Validation fill:#06b6d4,stroke:#0891b2,stroke-width:2px,color:#fff
+    style Valid fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style ErrorHandle fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Process fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Sync fill:#fde68a,stroke:#f59e0b,stroke-width:2px
     style CloudSync fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style Done fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
-    style ToOrch fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff`
+    style Queue fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Verification fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style LocalFeatures fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
+    style Ready fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
   },
 
   phase1: {
@@ -309,5 +343,520 @@ export const flowchartData = {
     style Immediate fill:#dc2626,stroke:#991b1b,stroke-width:2px,color:#fff
     style Sleep fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
     style ToOrch fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 1: Pattern Recognition Engine
+  feature1: {
+    title: "Feature 1: Pattern Recognition Engine",
+    description: "LSTM-based behavioral and income pattern identification",
+    icon: "BarChart3",
+    color: "from-indigo-600 to-blue-600",
+    code: `graph TB
+    Start["📊 Raw Transaction Data<br/>3+ Months History"]
+    
+    Start --> Load["💾 Load Historical Data<br/>Transactions | Income<br/>Expenses | Timestamps"]
+    
+    Load --> Preprocess["🧹 Data Preprocessing<br/>Normalize Values<br/>Handle Missing Data<br/>Time Series Formatting"]
+    
+    Preprocess --> LSTM["🧠 LSTM Neural Network<br/>Pattern Detection<br/>Temporal Dependencies<br/>Sequence Modeling"]
+    
+    LSTM --> Patterns["🔍 Extract Patterns<br/>Weekday Income: ₹800-1,200<br/>Weekend: ₹600-900<br/>Rainy Days: ₹300-500"]
+    
+    Patterns --> Spending["💳 Spending Analysis<br/>High Spend: Sundays<br/>Grocery: Every 4th Day<br/>Bonus Month: +30% Spend"]
+    
+    Spending --> Confidence["📊 Confidence Scoring<br/>Calculate Accuracy<br/>Pattern Reliability<br/>Prediction Confidence"]
+    
+    Confidence --> Score{"Confidence<br/>≥ 60%?"}
+    
+    Score -->|NO| Alert["⚠️ Low Confidence<br/>Need More Data"]
+    Score -->|YES| Anomaly
+    
+    Alert --> End["❌ Wait for More Data"]
+    
+    Anomaly["🎯 Anomaly Detection<br/>Unusual Spending<br/>Income Spikes<br/>Pattern Changes"]
+    
+    Anomaly --> Output["📤 Output Insights<br/>Pattern Profile<br/>Confidence Score<br/>Anomalies List"]
+    
+    Output --> Next["🚀 To Budget Agent"]
+    
+    style Start fill:#e0f2fe,stroke:#0369a1,stroke-width:2px
+    style Load fill:#bfdbfe,stroke:#1e40af,stroke-width:2px
+    style Preprocess fill:#93c5fd,stroke:#1e3a8a,stroke-width:2px
+    style LSTM fill:#4f46e5,stroke:#3730a3,stroke-width:2px,color:#fff
+    style Patterns fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff
+    style Spending fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    style Confidence fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Score fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Alert fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Anomaly fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Output fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Next fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style End fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 2: Budget Analysis Engine
+  feature2: {
+    title: "Feature 2: Budget Analysis Engine",
+    description: "Context-specific budget allocation for feast/famine scenarios",
+    icon: "PieChart",
+    color: "from-green-600 to-emerald-600",
+    code: `graph TB
+    Start["💰 Income + Pattern Data"]
+    
+    Start --> Costs["📋 Categorize Costs<br/>Fixed: Rent, Insurance<br/>Variable: Food, Fuel<br/>Discretionary"]
+    
+    Costs --> High["📈 High-Income Scenario<br/>Earned: ₹1,200+"]
+    Costs --> Low["📉 Low-Income Scenario<br/>Earned: ₹600-"]
+    
+    High --> HighAlloc["✅ High-Income Budget<br/>Savings: ₹300-400<br/>Expenses: ₹850<br/>Discretionary: ₹50"]
+    
+    Low --> LowAlloc["⚠️ Low-Income Budget<br/>Savings: ₹75<br/>Expenses: ₹450<br/>Discretionary: ₹0"]
+    
+    HighAlloc --> Feast["🎉 Feast-Week Plan<br/>Build Emergency Fund<br/>Goal-Specific Savings<br/>Investment Opportunities"]
+    
+    LowAlloc --> Famine["😐 Famine-Week Plan<br/>Minimum Savings<br/>Essential Only<br/>Preserve Liquidity"]
+    
+    Feast --> Compare["🔄 Sustainability Check<br/>Can User Follow?<br/>Historical Success?<br/>Realistic?"]
+    
+    Famine --> Compare
+    
+    Compare --> Valid{"Sustainable?"}
+    
+    Valid -->|NO| Adjust["🔧 Adjust Allocation<br/>Lower Targets<br/>More Flexibility"]
+    Valid -->|YES| Final
+    
+    Adjust --> Final["✅ Final Budget<br/>Feast: Days 1-10<br/>Famine: Days 11-20<br/>Buffer: Days 21-30"]
+    
+    Final --> Next["🚀 To Context Agent"]
+    
+    style Start fill:#f0fdf4,stroke:#15803d,stroke-width:2px
+    style Costs fill:#bbf7d0,stroke:#16a34a,stroke-width:2px
+    style High fill:#86efac,stroke:#22c55e,stroke-width:2px
+    style Low fill:#fbca04,stroke:#f59e0b,stroke-width:2px
+    style HighAlloc fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style LowAlloc fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Feast fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Famine fill:#f97316,stroke:#ea580c,stroke-width:2px,color:#fff
+    style Compare fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Adjust fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Final fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 3: Context Intelligence Engine
+  feature3: {
+    title: "Feature 3: Context Intelligence Engine",
+    description: "Weather, cultural calendars, and event integration",
+    icon: "Cloud",
+    color: "from-sky-600 to-cyan-600",
+    code: `graph TB
+    Start["🌍 Context Data"]
+    
+    Start --> Weather["🌤️ Weather APIs<br/>OpenWeather Data<br/>Rain Forecast<br/>Monsoon Schedule"]
+    
+    Start --> Cultural["🎉 Cultural Calendars<br/>Diwali | Holi | Eid<br/>New Year | Navratri<br/>Regional Festivals"]
+    
+    Start --> Economic["📰 Economic Events<br/>Market News<br/>Policy Changes<br/>Market Crashes"]
+    
+    Weather --> Analysis["🔍 Impact Analysis"]
+    Cultural --> Analysis
+    Economic --> Analysis
+    
+    Analysis --> Rain{"Rain<br/>Coming?"}
+    Rain -->|YES| RainImpact["📉 Rain Impact<br/>Uber Rides -40%<br/>Income ↓ 30-50%<br/>Spending ↑ 20%"]
+    Rain -->|NO| NoRain["✅ Normal Conditions"]
+    
+    Analysis --> Festival{"Festival<br/>≤30 Days?"}
+    Festival -->|YES| FestivalPlan["🎁 Festival Plan<br/>Diwali Fund Goal<br/>Save ₹200/day<br/>25-Day Target"]
+    Festival -->|NO| Regular["📅 Regular Days"]
+    
+    RainImpact --> Model
+    NoRain --> Model
+    FestivalPlan --> Model
+    Regular --> Model
+    
+    Model["🧮 Context Model<br/>Adjust Forecasts<br/>Update Budgets<br/>Recalculate Goals"]
+    
+    Model --> Output["📤 Context Insights<br/>Impact Factors<br/>Adjusted Budgets<br/>Event Alerts"]
+    
+    Output --> Next["🚀 To Volatility Forecaster"]
+    
+    style Start fill:#e0f7ff,stroke:#0369a1,stroke-width:2px
+    style Weather fill:#a5f3fc,stroke:#0891b2,stroke-width:2px
+    style Cultural fill:#f0abfc,stroke:#d946ef,stroke-width:2px
+    style Economic fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Analysis fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Rain fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style RainImpact fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+    style NoRain fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Festival fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style FestivalPlan fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Regular fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Model fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Output fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Next fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 4: Income Volatility Forecaster
+  feature4: {
+    title: "Feature 4: Income Volatility Forecaster",
+    description: "30-day income scenarios with probability distributions",
+    icon: "TrendingUp",
+    color: "from-pink-600 to-rose-600",
+    code: `graph TB
+    Start["📊 Historical Income<br/>+ Context Data"]
+    
+    Start --> Prepare["🧹 Time Series Data<br/>Income History<br/>Seasonal Factors<br/>Context Adjustments"]
+    
+    Prepare --> Model["🔮 Forecasting Models<br/>ARIMA Analysis<br/>Exponential Smoothing<br/>Regression Models"]
+    
+    Model --> Scenarios["📊 Generate Scenarios<br/>Best Case<br/>Expected Case<br/>Worst Case"]
+    
+    Scenarios --> Probability["📈 Probability Dist<br/>70% Confidence: ₹35,000<br/>20% Confidence: ₹28,000<br/>10% Confidence: ₹42,000"]
+    
+    Probability --> Confidence{"Forecast<br/>Confidence<br/>≥ 80%?"}
+    
+    Confidence -->|HIGH| Aggressive["🚀 High Confidence<br/>→ Aggressive Strategy<br/>Recommend Higher Savings"]
+    Confidence -->|MEDIUM| Balanced["⚖️ Medium Confidence<br/>→ Balanced Strategy<br/>Moderate Targets"]
+    Confidence -->|LOW| Conservative["🛡️ Low Confidence<br/>→ Conservative Strategy<br/>Lower Expectations"]
+    
+    Aggressive --> Details["💡 Strategic Details<br/>Save ₹300 Daily<br/>School Fee: ₹5,000 in 10 Days"]
+    Balanced --> Details
+    Conservative --> Details
+    
+    Details --> Track["📊 Tracking Plan<br/>Daily Income Check<br/>Adjust if Needed<br/>Alert if Diverges"]
+    
+    Track --> Output["📤 Volatility Report<br/>Scenarios | Probabilities<br/>Recommendations<br/>Risk Assessment"]
+    
+    Output --> Next["🚀 To Recommendation Engine"]
+    
+    style Start fill:#fdf2f8,stroke:#be185d,stroke-width:2px
+    style Prepare fill:#fbcfe8,stroke:#ec4899,stroke-width:2px
+    style Model fill:#f472b6,stroke:#ec4899,stroke-width:2px,color:#fff
+    style Scenarios fill:#ec4899,stroke:#be185d,stroke-width:2px,color:#fff
+    style Probability fill:#f43f5e,stroke:#e11d48,stroke-width:2px,color:#fff
+    style Confidence fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Aggressive fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Balanced fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Conservative fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+    style Details fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Track fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Output fill:#ec4899,stroke:#be185d,stroke-width:2px,color:#fff
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 5: Knowledge Integration
+  feature5: {
+    title: "Feature 5: Knowledge Integration & Opportunities",
+    description: "Match users to 200+ government schemes and programs",
+    icon: "Award",
+    color: "from-orange-600 to-amber-600",
+    code: `graph TB
+    Start["👤 User Profile<br/>Income | Age | Location<br/>Employment | Dependents"]
+    
+    Start --> Calculate["📊 Calculate Eligibility<br/>Annual Income: ₹5.4L<br/>Income Category<br/>Location Tier"]
+    
+    Calculate --> DB["🗄️ Schemes Database<br/>200+ Opportunities"]
+    
+    DB --> Match["🔍 Matching Algorithm<br/>Cross-reference Criteria<br/>Verify Eligibility<br/>Check Documentation"]
+    
+    Match --> Results["🏆 Matched Schemes"]
+    
+    Results --> Mudra["💳 PM Mudra Yojana<br/>Loan: ₹10L<br/>Interest: 0% Year 1<br/>Use Case: Vehicle"]
+    
+    Results --> Insurance["🛡️ Suraksha Bima<br/>Cost: ₹12/year<br/>Coverage: ₹5-10L<br/>Use Case: Accident"]
+    
+    Results --> NPS["🏦 National Pension<br/>Gov Co-contrib: 50%<br/>Tax Benefits<br/>Retirement Security"]
+    
+    Mudra --> Impact["📈 Impact Analysis<br/>Loan → Vehicle<br/>Commission ↓ -₹2,000/mo<br/>Earnings ↑ +₹2,000/mo"]
+    
+    Insurance --> Impact
+    
+    NPS --> Impact
+    
+    Impact --> Recommended["✅ Recommended Actions<br/>1. Apply for Mudra<br/>2. Get Insurance<br/>3. Start NPS"]
+    
+    Recommended --> Output["📤 Opportunities Report<br/>Schemes | Details<br/>Application Links<br/>Expected Benefits"]
+    
+    Output --> Next["🚀 To Tax Engine"]
+    
+    style Start fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style Calculate fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style DB fill:#fed7aa,stroke:#f97316,stroke-width:2px
+    style Match fill:#fb923c,stroke:#f97316,stroke-width:2px,color:#fff
+    style Results fill:#f97316,stroke:#ea580c,stroke-width:2px,color:#fff
+    style Mudra fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Insurance fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style NPS fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Impact fill:#86efac,stroke:#22c55e,stroke-width:2px
+    style Recommended fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Output fill:#f97316,stroke:#ea580c,stroke-width:2px,color:#fff,stroke-width:3px
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 6: Tax and Compliance Engine
+  feature6: {
+    title: "Feature 6: Tax & Compliance Engine",
+    description: "Automated income tax filing and deduction optimization",
+    icon: "FileText",
+    color: "from-cyan-600 to-teal-600",
+    code: `graph TB
+    Start["💼 Income Data<br/>Gig Worker Income<br/>Multiple Sources"]
+    
+    Start --> Aggregate["➕ Aggregate Income<br/>3+ Income Streams<br/>Bonus | Tips | Referral<br/>Total: ₹5.4L"]
+    
+    Aggregate --> Deduction["📋 Identify Deductions<br/>Vehicle Fuel: 40%<br/>Maintenance: 8%<br/>Insurance: 5%<br/>Phone/Internet: 3%"]
+    
+    Deduction --> Calculate["🧮 Calculate Taxable<br/>Gross: ₹5.4L<br/>Deductions: ₹1.3L<br/>Taxable: ₹4.1L"]
+    
+    Calculate --> Tax["💰 Calculate Tax<br/>Tax Rate: 5-30%<br/>Tax Liability: ₹8,000"]
+    
+    Tax --> Exemptions["🎁 Check Exemptions<br/>Section 80C<br/>Section 80D<br/>Special Provisions"]
+    
+    Exemptions --> Optimized["✨ Optimized Tax<br/>After Exemptions: ₹2,000<br/>Savings: ₹6,000"]
+    
+    Optimized --> ITR["📄 Generate ITR<br/>ITR Form 2 or 3<br/>Auto-filled Fields<br/>Ready to File"]
+    
+    ITR --> File{"File<br/>Mode?"}
+    
+    File -->|AUTO| AutoFile["🤖 Auto-File (Portal)<br/>Direct to Income Tax"]
+    File -->|MANUAL| ManualFile["✍️ Manual Submission<br/>Download | Print | File"]
+    
+    AutoFile --> Process["⏳ Processing"]
+    ManualFile --> Process
+    
+    Process --> Refund["💵 Refund Generated<br/>Amount: ₹1,800<br/>Timeline: 2-4 Weeks"]
+    
+    Refund --> Compliance["✅ Compliance Status<br/>All Clear | No Penalties<br/>Future Tax Prepared"]
+    
+    Compliance --> Output["📤 Compliance Report<br/>ITR Filed | Tax Paid<br/>Refund Status | Documents"]
+    
+    Output --> Next["🚀 To Recommendation Engine"]
+    
+    style Start fill:#ecf0f1,stroke:#34495e,stroke-width:2px
+    style Aggregate fill:#d5dbdb,stroke:#566573,stroke-width:2px
+    style Deduction fill:#a9ccce,stroke:#1e8449,stroke-width:2px
+    style Calculate fill:#85c1e2,stroke:#1b4f72,stroke-width:2px
+    style Tax fill:#f8b88b,stroke:#ba4a00,stroke-width:2px
+    style Exemptions fill:#fad7a0,stroke:#d68910,stroke-width:2px
+    style Optimized fill:#82e0aa,stroke:#186a3b,stroke-width:2px,color:#fff
+    style ITR fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style File fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style AutoFile fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style ManualFile fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Process fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Refund fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Compliance fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px
+    style Output fill:#1b4f72,stroke:#154360,stroke-width:2px,color:#fff
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 7: Recommendation Engine
+  feature7: {
+    title: "Feature 7: Recommendation & Reasoning Engine",
+    description: "Claude-powered transparent personalized guidance",
+    icon: "Lightbulb",
+    color: "from-yellow-600 to-amber-600",
+    code: `graph TB
+    Start["📊 All Agent Outputs<br/>Patterns | Budget | Context<br/>Volatility | Opportunities<br/>Tax | Risk Assessment"]
+    
+    Start --> Sync["🔄 Unified Context<br/>Consolidate All Data<br/>Verify Consistency<br/>Identify Conflicts"]
+    
+    Sync --> Claude["🧠 Claude Advanced Reasoning<br/>Multi-Step Thinking<br/>Cross-Domain Analysis<br/>Personalization"]
+    
+    Claude --> Reasoning["💭 Reasoning Process<br/>Need: ₹5,000 School Fee<br/>Target: 10 Days<br/>Current: ₹2,450<br/>Daily Income: ₹1,100"]
+    
+    Reasoning --> Simulate["🎮 Simulate Scenarios<br/>What-if Analysis<br/>Success Probability<br/>Failure Cases"]
+    
+    Simulate --> Decision["🎯 Final Decision<br/>Save ₹300 Daily<br/>Success Probability: 87%"]
+    
+    Decision --> Explain["📚 Generate Explanation<br/>Why? Strong income days<br/>Historical Success: 87%<br/>Risk Level: Low<br/>Data Sources: cited"]
+    
+    Explain --> Personalize["🎨 Personalization<br/>Language: Simple<br/>Literacy: Adapted<br/>Tone: Encouraging<br/>Delivery: SMS + App"]
+    
+    Personalize --> Recommend["✅ Final Recommendation<br/>Save ₹300 daily<br/>By: School Fee Deadline<br/>Confidence: HIGH"]
+    
+    Recommend --> Output["📤 Recommendation Package<br/>Action | Reasoning<br/>Success Rate | Timeline<br/>Alternatives | Risks"]
+    
+    Output --> Next["🚀 To Risk Assessment"]
+    
+    style Start fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style Sync fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Claude fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Reasoning fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Simulate fill:#fb923c,stroke:#f97316,stroke-width:2px,color:#fff
+    style Decision fill:#f97316,stroke:#ea580c,stroke-width:2px,color:#fff
+    style Explain fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Personalize fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Recommend fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Output fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff,stroke-width:3px
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 8: Risk Assessment & Human Escalation
+  feature8: {
+    title: "Feature 8: Risk Assessment & Human Escalation",
+    description: "Routes high-risk cases to qualified financial advisors",
+    icon: "AlertCircle",
+    color: "from-red-600 to-orange-600",
+    code: `graph TB
+    Start["📋 Recommendation Ready"]
+    
+    Start --> Assessment["🔍 Risk Assessment<br/>Confidence Check<br/>Data Quality Check<br/>Edge Case Detection"]
+    
+    Assessment --> Risk{"Risk<br/>Level?"}
+    
+    Risk -->|LOW| Low["✅ Low Risk<br/>Confidence: ≥ 80%<br/>Financial Stability<br/>Clear Path Forward"]
+    Risk -->|MEDIUM| Medium["⚠️ Medium Risk<br/>Confidence: 60-80%<br/>Moderate Uncertainty<br/>Expert Review Needed"]
+    Risk -->|HIGH| High["🚨 High Risk<br/>Confidence: < 60%<br/>Emergency Situation<br/>Immediate Escalation"]
+    
+    Low --> Deliver["📤 Direct Delivery<br/>Send to User"]
+    
+    Medium --> Queue["📋 Expert Queue<br/>Assign to Advisor<br/>Priority: Medium<br/>SLA: 2 Hours"]
+    
+    High --> Immediate["🔴 Immediate Escalation<br/>Emergency Alert<br/>Call Available Advisor<br/>SLA: 10 Minutes"]
+    
+    Queue --> Expert["👨‍💼 Advisor Review<br/>Analyze Recommendation<br/>Add Expert Insight<br/>Modify if Needed"]
+    
+    Immediate --> Emergency["🚑 Emergency Support<br/>Crisis Management<br/>Immediate Assistance<br/>24/7 Support"]
+    
+    Expert --> Approved["✅ Expert Approved<br/>Enhanced Recommendation"]
+    Emergency --> Approved
+    
+    Approved --> Output["📤 Final Recommendation<br/>Delivery Ready"]
+    
+    Output --> Deliver
+    
+    Deliver --> Next["🚀 To Action Execution"]
+    
+    style Start fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px
+    style Assessment fill:#dbeafe,stroke:#1e3a8a,stroke-width:2px
+    style Risk fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Low fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Medium fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style High fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+    style Queue fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Immediate fill:#dc2626,stroke:#991b1b,stroke-width:2px,color:#fff
+    style Expert fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Emergency fill:#f87171,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style Approved fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px
+    style Output fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Deliver fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 9: Action Execution
+  feature9: {
+    title: "Feature 9: Action Execution & Control",
+    description: "Automates approved financial actions with user control",
+    icon: "Zap",
+    color: "from-green-600 to-lime-600",
+    code: `graph TB
+    Start["📦 Recommendation Ready"]
+    
+    Start --> Approval["✋ User Approval<br/>Review Action<br/>Modify Amount<br/>Accept | Reject"]
+    
+    Approval --> UserDecision{"User<br/>Decision?"}
+    
+    UserDecision -->|REJECT| Rejected["👎 Action Rejected<br/>Log Rejection Reason<br/>Alternative Offered"]
+    UserDecision -->|MODIFY| Modified["✏️ Modified Action<br/>User Input Saved<br/>New Targets Applied"]
+    UserDecision -->|ACCEPT| Accepted["✅ Action Accepted"]
+    
+    Rejected --> Feedback["📊 Collect Feedback"]
+    Modified --> Accepted
+    
+    Accepted --> Verify["🔐 Security Verification<br/>2FA | Biometric<br/>UPI PIN | Password"]
+    
+    Verify --> Execute["⚡ Execute Action<br/>Auto-Save ₹300 Daily<br/>Via UPI Transfer<br/>Every 6:00 AM"]
+    
+    Execute --> Schedule["📅 Schedule Jobs<br/>Recurring Automation<br/>Bill Payments: Automatic<br/>SIP Investments: Auto"]
+    
+    Schedule --> Track["📊 Real-Time Tracking<br/>Balance Update<br/>Transaction Log<br/>Goal Progress"]
+    
+    Track --> Monitor["🔔 Monitoring<br/>Auto-notify User<br/>Daily Update:<br/>Saved: ₹1,800 (60%)"]
+    
+    Monitor --> Success{"Goal<br/>Achieved?"}
+    
+    Success -->|YES| Complete["🎉 Celebrate Success<br/>Badge Unlocked<br/>Streak Counter<br/>Achievement Share"]
+    Success -->|NO| Adjust["🔧 Adjust Course<br/>Recommendation Update<br/>Reality Check<br/>New Strategy"]
+    
+    Complete --> Output["📤 Success Report<br/>Results | Learning<br/>Next Milestone"]
+    Adjust --> Output
+    Feedback --> Output
+    
+    Output --> Next["🚀 To Outcome Verification"]
+    
+    style Start fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px
+    style Approval fill:#d1fae5,stroke:#047857,stroke-width:2px
+    style UserDecision fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Rejected fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Modified fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Accepted fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Verify fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Execute fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Schedule fill:#86efac,stroke:#22c55e,stroke-width:2px
+    style Track fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Monitor fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Success fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Complete fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px
+    style Adjust fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+    style Output fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Next fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff`
+  },
+
+  // FEATURE 10: Outcome Verification
+  feature10: {
+    title: "Feature 10: Outcome Verification & Learning",
+    description: "Tracks real financial results and drives continuous learning",
+    icon: "CheckCircle",
+    color: "from-teal-600 to-green-600",
+    code: `graph TB
+    Start["📊 Action Execution Results"]
+    
+    Start --> Baseline["📸 Baseline Snapshot<br/>Starting Balance<br/>Goals | Timelines<br/>Historical Baseline"]
+    
+    Baseline --> Track["📈 Real-Time Tracking<br/>Daily Transactions<br/>Goal Progress<br/>Deviation Detection"]
+    
+    Track --> Measure["📊 Measurement Period<br/>Week 1 | Week 2<br/>Week 3 | Week 4"]
+    
+    Measure --> Attribution["🎯 Attribution Analysis<br/>Success Rate<br/>System Impact<br/>User Behavior"]
+    
+    Attribution --> Results["✅ Actual Results<br/>Saved: ₹3,000/₹5,000 (60%)<br/>On Track? Yes/No<br/>Timeline: 10 Days → 13 Days"]
+    
+    Results --> Success{"Goal<br/>Success?"}
+    
+    Success -->|YES| Positive["🎉 Positive Outcome<br/>Recommendation Works<br/>Reinforce Pattern<br/>Increase Confidence"]
+    Success -->|NO| Negative["❌ Negative Outcome<br/>Find Root Cause<br/>Income Drop? Unexpected Expense?<br/>Adjust Strategy"]
+    
+    Positive --> Learn["🧠 Learning Processing<br/>Update Model<br/>Boost Similar Recs<br/>Add Success Pattern"]
+    Negative --> Learn
+    
+    Learn --> Adapt["🔄 Adaptive Behavior<br/>New Communication Style<br/>Adjusted Targets<br/>Alternative Strategies"]
+    
+    Adapt --> Dashboard["📊 Dashboard Update<br/>Before/After Metrics<br/>Impact Visualization<br/>Peer Comparison"]
+    
+    Dashboard --> Feedback["💬 Feedback Collection<br/>What Helped Most?<br/>What Was Hard?<br/>What to Improve?"]
+    
+    Feedback --> Next_Cycle["🔁 Next Recommendation<br/>Smarter | More Personalized<br/>Better Success Rate"]
+    
+    Next_Cycle --> Final["✅ Continuous Learning<br/>System Improves Daily<br/>More Accurate<br/>More Trustworthy"]
+    
+    style Start fill:#ccfbf1,stroke:#0d9488,stroke-width:2px
+    style Baseline fill:#99f6e4,stroke:#0f766e,stroke-width:2px
+    style Track fill:#5eead4,stroke:#0d9488,stroke-width:2px
+    style Measure fill:#2dd4bf,stroke:#0d9488,stroke-width:2px,color:#fff
+    style Attribution fill:#14b8a6,stroke:#0f766e,stroke-width:2px,color:#fff
+    style Results fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style Success fill:#fde68a,stroke:#f59e0b,stroke-width:2px
+    style Positive fill:#86efac,stroke:#22c55e,stroke-width:2px
+    style Negative fill:#fecaca,stroke:#dc2626,stroke-width:2px
+    style Learn fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Adapt fill:#bfdbfe,stroke:#3b82f6,stroke-width:2px
+    style Dashboard fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style Feedback fill:#e9d5ff,stroke:#c084fc,stroke-width:2px
+    style Next_Cycle fill:#a78bfa,stroke:#7c3aed,stroke-width:2px,color:#fff
+    style Final fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,stroke-width:3px`
   }
 };
+
+export default flowchartData;
