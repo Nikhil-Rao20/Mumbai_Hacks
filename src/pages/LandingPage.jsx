@@ -121,28 +121,28 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
       role: 'Medical Image Analysis Researcher | Computer Vision & Deep Learning',
       linkedin: 'https://www.linkedin.com/in/nikhileswara-rao-sulake/',
       // image: 'nikhil.png',
-      image: 'src/data/nikhil_add.png',
+      image: 'https://github.com/Nikhil-Rao20/Mumbai_Hacks/blob/main/src/data/nikhil_add.png',
       initials: 'NR'
     },
     {
       name: 'Sai Manikanta Eswar Machara',
       role: 'Computer Vision Researcher | Medical Imaging | Deep Learning',
       linkedin: 'https://www.linkedin.com/in/sai-manikanta-eswar-machara/',
-      image: 'eswar.jpg',
+      image: 'https://github.com/Nikhil-Rao20/Mumbai_Hacks/blob/main/eswar.jpg',
       initials: 'SM'
     },
     {
       name: 'Siva Teja Reddy Annapureddy',
       role: 'Machine Learning Engineer | Generative AI',
       linkedin: 'https://www.linkedin.com/in/siva-teja-reddy-annapureddy/',
-      image: 'siva.jpeg',
+      image: 'https://github.com/Nikhil-Rao20/Mumbai_Hacks/blob/main/siva.jpeg',
       initials: 'ST'
     },
     {
       name: 'Likhith Busam',
       role: 'Agentic AI Specialist | Generative AI',
       linkedin: 'https://www.linkedin.com/in/likhith-busam-7b465a31b/',
-      image: 'likith.png',
+      image: 'https://github.com/Nikhil-Rao20/Mumbai_Hacks/blob/main/likith.png',
       initials: 'LB'
     },
     {
