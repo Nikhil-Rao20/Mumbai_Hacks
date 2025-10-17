@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Navbar from '@/components/Navbar'
 import LandingPage from '@/pages/LandingPage'
 import PhasesPage from '@/pages/PhasesPage'
 import FeaturesPage from '@/pages/FeaturesPage'
@@ -27,6 +28,12 @@ function App() {
 
   return (
     <>
+      <Navbar 
+        isDark={isDark} 
+        onThemeToggle={() => setIsDark(!isDark)} 
+        onNavigate={handleNavigate}
+        currentPage={currentPage}
+      />
       {currentPage === 'landing' && (
         <LandingPage
           isDark={isDark}

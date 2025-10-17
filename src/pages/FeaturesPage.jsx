@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { ChevronDown, ChevronUp, Copy, ExternalLink, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react'
-import Header from '@/components/Header'
 import FeatureCard from '@/components/FeatureCard'
 import MermaidDiagram from '@/components/MermaidDiagram'
 import CodeViewer from '@/components/CodeViewer'
@@ -25,7 +24,6 @@ function FeaturesPage({ isDark, onThemeToggle, onNavigate }) {
   return (
     <div className={isDark ? 'dark' : ''}>
       <div className={`min-h-screen ${isDark ? 'bg-slate-950' : 'bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50'}`}>
-        <Header isDark={isDark} onThemeToggle={onThemeToggle} />
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Navigation Bar */}

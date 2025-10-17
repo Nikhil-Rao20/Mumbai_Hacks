@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Check } from 'lucide-react'
-import Header from '@/components/Header'
 
 function LandingPage({ isDark, onThemeToggle, onNavigate }) {
   const [scrollY, setScrollY] = useState(0)
@@ -119,31 +118,39 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
   const team = [
     {
       name: 'Nikhileswara Rao Sulake',
-      role: 'Product Lead & Architect',
+      role: 'Medical Image Analysis Researcher | Computer Vision & Deep Learning',
       linkedin: 'https://www.linkedin.com/in/nikhileswara-rao-sulake/',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=nikhileswara',
+      // image: 'nikhil.png',
+      image: 'src/data/nikhil_add.png',
       initials: 'NR'
     },
     {
       name: 'Sai Manikanta Eswar Machara',
-      role: 'AI/ML Engineer',
+      role: 'Computer Vision Researcher | Medical Imaging | Deep Learning',
       linkedin: 'https://www.linkedin.com/in/sai-manikanta-eswar-machara/',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=saimanikanta',
+      image: 'eswar.png',
       initials: 'SM'
     },
     {
       name: 'Siva Teja Reddy Annapureddy',
-      role: 'Backend Engineer',
+      role: 'Machine Learning Engineer | Generative AI',
       linkedin: 'https://www.linkedin.com/in/siva-teja-reddy-annapureddy/',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sivateja',
+      image: 'siva.jpeg',
       initials: 'ST'
     },
     {
       name: 'Likhith Busam',
-      role: 'Full Stack Developer',
+      role: 'Agentic AI Specialist | Generative AI',
       linkedin: 'https://www.linkedin.com/in/likhith-busam-7b465a31b/',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=likhith',
+      image: 'likith.png',
       initials: 'LB'
+    },
+    {
+      name: 'Gopi Mahamkali',
+      role: 'Agentic AI Specialist | Software Developer',
+      linkedin: 'https://www.linkedin.com/in/gopi-mahamkali/',
+      image: 'gopi.png',
+      initials: 'GM'
     }
   ]
 
@@ -190,7 +197,6 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
       </svg>
 
       <div className={`min-h-screen ${isDark ? 'bg-slate-950' : 'bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50'}`}>
-        <Header isDark={isDark} onThemeToggle={onThemeToggle} />
 
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
@@ -371,7 +377,7 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
             <h2 className={`text-4xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               👥 Meet Our Expert Team
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
               {team.map((member, idx) => (
                 <a
                   key={idx}

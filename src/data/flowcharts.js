@@ -40,7 +40,7 @@ export const flowchartData = {
   },
   
   phase0: {
-    title: "Phase 0: Offline-First Engine",
+    title: "Offline-First Engine",
     description: "Device-first data collection with smart synchronization",
     icon: "Database",
     color: "from-blue-600 to-cyan-600",
@@ -104,7 +104,7 @@ export const flowchartData = {
   },
 
   phase1: {
-    title: "Phase 1: Data Collection & Validation",
+    title: "Data Collection & Validation",
     description: "Multi-source data ingestion with quality assurance",
     icon: "Database",
     color: "from-cyan-600 to-teal-600",
@@ -140,7 +140,7 @@ export const flowchartData = {
   },
 
   phase2: {
-    title: "Phase 2: Analysis Layer",
+    title: "Analysis Layer",
     description: "4 parallel AI agents analyzing financial patterns",
     icon: "Brain",
     color: "from-green-600 to-emerald-600",
@@ -181,7 +181,7 @@ export const flowchartData = {
   },
 
   phase3: {
-    title: "Phase 3: Reasoning & Recommendations",
+    title: "Reasoning & Recommendations",
     description: "Claude-powered intelligent recommendations with transparency",
     icon: "Brain",
     color: "from-amber-600 to-orange-600",
@@ -222,7 +222,7 @@ export const flowchartData = {
   },
 
   phase4: {
-    title: "Phase 4: Action & Delivery",
+    title: "Action & Delivery",
     description: "Multi-channel delivery with engagement features",
     icon: "Zap",
     color: "from-red-600 to-pink-600",
@@ -265,7 +265,7 @@ export const flowchartData = {
   },
 
   phase5: {
-    title: "Phase 5: Learning & Adaptation",
+    title: "Learning & Adaptation",
     description: "Continuous improvement through feedback and outcome tracking",
     icon: "TrendingUp",
     color: "from-purple-600 to-indigo-600",
