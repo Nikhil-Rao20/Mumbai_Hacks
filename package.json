@@ -1,7 +1,7 @@
 {
-  "name": "fintech-flowcharts-portal",
+  "name": "kamai-financial-companion",
   "version": "1.0.0",
-  "description": "Interactive Fintech Flowchart Portal for Gig Workers",
+  "description": "KAMAI - Your Smart Financial Companion for Daily Earnings",
   "type": "module",
   "scripts": {
     "dev": "vite",

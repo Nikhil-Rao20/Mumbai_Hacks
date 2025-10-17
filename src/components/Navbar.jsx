@@ -14,11 +14,9 @@ function Navbar({ isDark, onThemeToggle, onNavigate, currentPage }) {
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">₹</span>
-            </div>
+            <img src="/logo.jpg" alt="KAMAI Logo" className="w-8 h-8 rounded-lg object-cover" />
             <span className={`font-bold text-xl ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Rudra
+              KAMAI
             </span>
           </div>
 

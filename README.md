@@ -1,6 +1,8 @@
-# 💰 Fintech Flowcharts Portal
+# 💰 KAMAI - Your Smart Financial Companion
 
-An interactive web portal displaying optimized AI-powered financial system flowcharts for gig workers. Built with React, Vite, and Mermaid.js.
+**KAMAI** (Lakshmi Raave Maa Intiki): Your Smart Financial Companion for Daily Earnings
+
+An interactive web portal providing AI-powered financial management for gig workers. Built with React, Vite, and Mermaid.js.
 
 ## ✨ Features
 

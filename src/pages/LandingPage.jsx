@@ -194,10 +194,10 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           <div className="text-center mb-16 animate-fadeIn" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
             <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              FinTech Agent Bot <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Rudra</span>
+              KAMAI <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Financial Companion</span>
             </h1>
             <p className={`text-xl sm:text-2xl mb-8 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-              One Stop Solution for All Gig Workers
+              Lakshmi Raave Maa Intiki: Your Smart Financial Companion for Daily Earnings
             </p>
             <p className={`text-lg mb-12 max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Empowering 230M+ gig workers with AI-powered financial intelligence, personalized guidance, and proactive wealth management in real-time.
@@ -252,7 +252,7 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
         <section className={`py-20 ${isDark ? 'bg-slate-900' : 'bg-gradient-to-r from-purple-50 to-blue-50'}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className={`text-4xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              About Rudra
+              About KAMAI
             </h2>
             
             {/* Main content with visual elements */}
@@ -267,9 +267,9 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
                 <div className="lg:col-span-2 p-8 sm:p-12 flex flex-col justify-center">
                   <p className={`text-base sm:text-lg mb-6 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     <span className={`font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent`}>
-                      Rudra
+                      KAMAI
                     </span>
-                    {' '} is a comprehensive <span className="font-semibold">AI-powered financial management system</span> designed specifically for India's gig economy workforce.
+                    {' '} (Lakshmi Raave Maa Intiki) is a comprehensive <span className="font-semibold">AI-powered financial management system</span> designed specifically for India's gig economy workforce.
                   </p>
                   
                   <p className={`text-base sm:text-lg mb-6 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -407,10 +407,10 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className={`${isDark ? 'bg-gradient-to-r from-purple-900 to-blue-900 border-purple-700' : 'bg-gradient-to-r from-purple-600 to-blue-600'} rounded-2xl p-12 text-center border`}>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Ready to Explore Rudra?
+              Ready to Explore KAMAI?
             </h2>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Dive into our comprehensive flowcharts to understand how Rudra works across different phases and features.
+              Dive into our comprehensive flowcharts to understand how KAMAI works across different phases and features.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -434,9 +434,9 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div>
-                <h3 className={`font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>Rudra</h3>
+                <h3 className={`font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>KAMAI</h3>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  AI-powered financial assistant for gig workers
+                  Your Smart Financial Companion for Daily Earnings
                 </p>
               </div>
               <div>
@@ -472,7 +472,7 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
             </div>
             <div className={`border-t ${isDark ? 'border-slate-800' : 'border-gray-300'} pt-8 text-center`}>
               <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
-                © 2024 Rudra FinTech Agent. Empowering Gig Workers Globally. 🚀
+                © 2024 KAMAI. Lakshmi Raave Maa Intiki - Your Smart Financial Companion. 🚀
               </p>
               <p className={`text-xs mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>
                 Built with React | Powered by Claude Sonnet 4.5 | Secure & Compliant with RBI/NPCI Standards
