@@ -369,7 +369,7 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
             <h2 className={`text-4xl font-bold text-center mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               👥 Meet Our Expert Team
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {team.map((member, idx) => (
                 <a
                   key={idx}
