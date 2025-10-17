@@ -128,7 +128,7 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
       name: 'Sai Manikanta Eswar Machara',
       role: 'Computer Vision Researcher | Medical Imaging | Deep Learning',
       linkedin: 'https://www.linkedin.com/in/sai-manikanta-eswar-machara/',
-      image: 'eswar.png',
+      image: 'eswar.jpg',
       initials: 'SM'
     },
     {
