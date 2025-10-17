@@ -120,37 +120,29 @@ function LandingPage({ isDark, onThemeToggle, onNavigate }) {
       name: 'Nikhileswara Rao Sulake',
       role: 'Medical Image Analysis Researcher | Computer Vision & Deep Learning',
       linkedin: 'https://www.linkedin.com/in/nikhileswara-rao-sulake/',
-      // image: 'nikhil.png',
-      image: 'src/data/nikhil_add.png',
+      image: '/nikhil.png',
       initials: 'NR'
     },
     {
       name: 'Sai Manikanta Eswar Machara',
       role: 'Computer Vision Researcher | Medical Imaging | Deep Learning',
       linkedin: 'https://www.linkedin.com/in/sai-manikanta-eswar-machara/',
-      image: 'eswar.jpg',
+      image: '/eswar.jpg',
       initials: 'SM'
     },
     {
       name: 'Siva Teja Reddy Annapureddy',
       role: 'Machine Learning Engineer | Generative AI',
       linkedin: 'https://www.linkedin.com/in/siva-teja-reddy-annapureddy/',
-      image: 'siva.jpeg',
+      image: '/siva.jpeg',
       initials: 'ST'
     },
     {
       name: 'Likhith Busam',
       role: 'Agentic AI Specialist | Generative AI',
       linkedin: 'https://www.linkedin.com/in/likhith-busam-7b465a31b/',
-      image: 'likith.png',
+      image: '/likith.png',
       initials: 'LB'
-    },
-    {
-      name: 'Gopi Mahamkali',
-      role: 'Agentic AI Specialist | Software Developer',
-      linkedin: 'https://www.linkedin.com/in/gopi-mahamkali/',
-      image: 'gopi.png',
-      initials: 'GM'
     }
   ]
 
